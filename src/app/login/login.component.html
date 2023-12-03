@@ -1,7 +1,11 @@
 <div class="loginRegister-container">
+  <div class="loginRegister-container">
     <h2>{{ isLogin ? 'Iniciar sesión' : 'Registrar cuenta' }}</h2>
   
     <form [formGroup]="formGroup" (ngSubmit)="loginRegister()" class="form">
+      <div *ngIf="registroExitoso || usuarioExistente" class="registro-exitoso">
+        {{ registroExitoso ? '¡Registro exitoso! Por favor, inicia sesión.' : '¡Usuario ya existe! Por favor, inicia sesión o utiliza otro correo electrónico.' }}
+      </div>
       <mat-form-field class="form-field" *ngIf="!isLogin">
         <input matInput type="text" formControlName="nombre" required placeholder="Nombre">
       </mat-form-field>

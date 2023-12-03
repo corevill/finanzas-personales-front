@@ -7,6 +7,20 @@
   margin: auto;
 }
 
+.registro-exitoso {
+  background-color: #d4edda; /* Color verde claro */
+  color: #155724; /* Color de texto */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  text-align: center;
+}
+
 .login-button {
   background-color: #007bff;
   color: #fff;

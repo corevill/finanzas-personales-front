@@ -13,7 +13,7 @@ import { forkJoin, map } from 'rxjs';
 
 export class AppService {
      usuarioEnSession: number | null |undefined = null;
-     apiPath = 'https://node-express-mmup-production.up.railway.app/api/v1/';
+     apiPath = '/api/';
      categorias: CategoriaGasto [] = [];
      gastos: Gasto [] = [];
      ingresos: Ingreso [] = [];
@@ -117,6 +117,10 @@ export class AppService {
   registrarUsuario(usuario: Usuario) {
     return this.http.post(`${this.apiPath}usuarios`, usuario);
   }
+
+  existeUsuario(email: string){
+  return this.http.get(`${this.apiPath}usuarios/verificar-existencia?email=${email}`);
+}
 
   actualizarUsuario(usuario: Usuario) {
     return this.http.put(`${this.apiPath}usuarios/${usuario.id}`, usuario);
