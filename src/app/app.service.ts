@@ -172,13 +172,13 @@ export class AppService {
         let saldo = 0;
         const ingresos = res[0].filter((i: any) => i.usuario_id == this.getUsuarioId());
         const gastos = res[1].filter((g: any) => g.usuario_id == this.getUsuarioId());
-        ingresos.forEach((i: any) => ingresosTotales += i.cantidad);
+        ingresos.forEach((i: any) => ingresosTotales += +i.cantidad);
         gastos.forEach((g: any) => {
-          gastosTotales += g.cantidad;
+          gastosTotales += +g.cantidad;
           if (g.tipo_gasto) {
-            caprichos += g.cantidad;
+            caprichos += +g.cantidad;
           } else {
-            necesidadBasica += g.cantidad;
+            necesidadBasica += +g.cantidad;
           }
         });
         saldo = ingresosTotales - gastosTotales;
