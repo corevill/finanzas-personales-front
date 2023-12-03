@@ -118,6 +118,10 @@ export class AppService {
     return this.http.post(`${this.apiPath}usuarios`, usuario);
   }
 
+  existeUsuario(email: string){
+  return this.http.get(`${this.apiPath}usuarios/verificar-existencia?email=${email}`);
+}
+
   actualizarUsuario(usuario: Usuario) {
     return this.http.put(`${this.apiPath}usuarios/${usuario.id}`, usuario);
   }

@@ -11,6 +11,8 @@ import { Usuario } from '../models/usuario';
 })
 export class LoginComponent implements OnInit {
   isLogin: boolean = true;
+  registroExitoso: boolean = false;
+  usuarioExistente: boolean = false;
   formGroup: FormGroup = this.fb.group({});
 
   constructor(
@@ -41,6 +43,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginRegister() {
+    if (this.formGroup.invalid) {
+      return;
+    }
+    
     if (this.isLogin) {
       this.appService.login(this.formGroup.value.email, this.formGroup.value.password).subscribe((result: any) => {
         if (result && result.data && result.data.length) {
@@ -49,18 +55,37 @@ export class LoginComponent implements OnInit {
         }
       });
     } else {
-      // Registrar
-      // 1 - crear objeto con datos del Usuario
       const nuevoUsuario: Usuario = {
         id: null,
         nombre: this.formGroup.value.nombre,
         apellido: this.formGroup.value.apellido,
         password: this.formGroup.value.password,
         saldo: 0,
-        email: this.formGroup.value.email
+        email: this.formGroup.value.email || ''
       };
-      // 2 - llamar a la funcion para crear un usuario nuevo (si no existe crearla en el appService)
-      // 3 - llamar a la funcion del login con los datos del usuairo creado
+      if (nuevoUsuario.email !== null) {
+        this.appService.existeUsuario(nuevoUsuario.email).subscribe((existe: any) => {
+          if (existe) {
+            this.usuarioExistente = true;
+            this.registroExitoso = false;
+          } else {
+            this.appService.registrarUsuario(nuevoUsuario).subscribe(
+              (result: any) => {
+                this.registroExitoso = true;
+                this.usuarioExistente = false;
+              },
+              (error) => {
+                if (error && error.error && error.error.message === 'Usuario ya existente') {
+                  this.usuarioExistente = true;
+                  this.registroExitoso = false;
+                } else {
+                  console.error('Error al registrar usuario:', error);
+                }
+              }
+            );
+          }
+        });
+      }
     }
   }
 
