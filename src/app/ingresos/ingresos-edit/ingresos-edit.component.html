@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>{{ modoEditar ? 'Editar Ingreso' : 'Crear Ingreso' }}</h1>
+<div mat-dialog-content *ngIf="ingresosForm" [formGroup]="ingresosForm">
+  <mat-form-field class="form-field">
+    <mat-label for="nombre">Nombre:</mat-label>
+    <input formControlName="nombre" matInput type="text" id="nombre" name="nombre">
+    <mat-error *ngIf="ingresosForm.controls['nombre'].errors">
+      Debe indicar un nombre
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <mat-label for="cantidad">Cantidad:</mat-label>
+    <input formControlName="cantidad" matInput type="number" id="cantidad" name="cantidad">
+    <mat-error *ngIf="ingresosForm.controls['cantidad'].errors">
+      Debe indicar una cantidad
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <mat-label for="fecha">Fecha:</mat-label>
+    <input matInput formControlName="fecha" name="fecha" [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="ingresosForm.controls['fecha'].errors">
+      Debe indicar una fecha
+    </mat-error>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button (click)="cancelarEditar()" class="secundary-button">Cancelar</button>
+    <button (click)="confirmarEditar()" cdkFocusInitial class="main-button">
+      {{ modoEditar ? 'Guardar' : 'Crear' }}
+    </button>
+  </div>
+</div>

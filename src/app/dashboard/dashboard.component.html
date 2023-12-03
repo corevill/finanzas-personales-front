@@ -1,0 +1,46 @@
+<div class="table-container">
+  <h2>Resumen de Cuenta</h2>
+  <form [formGroup]="resumenForm">
+    <table class="table mat-elevation-z8">
+      <thead>
+        <tr>
+          <th>Tipo de Gasto</th>
+          <th>% Ingresos</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Necesidades Básicas</td>
+          <td>{{ resumenForm.get('necesidadBasicaPorcentaje')?.value | number:'1.2-2' }}%</td>
+          <td>{{ resumenForm.get('necesidadBasica')?.value | currency:'EUR':'symbol':'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td>Caprichos</td>
+          <td>{{ resumenForm.get('caprichosPorcentaje')?.value | number:'1.2-2' }}%</td>
+          <td>{{ resumenForm.get('caprichos')?.value | currency:'EUR':'symbol':'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td>Ahorros</td>
+          <td>{{ resumenForm.get('ahorrosPorcentaje')?.value | number:'1.2-2' }}%</td>
+          <td>{{ resumenForm.get('ahorros')?.value | currency:'EUR':'symbol':'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <p class="table-paragraph">Ingresos Totales: {{ resumenForm.get('ingresosTotales')?.value | currency:'EUR':'symbol':'1.2-2'  }}</p>
+  <p class="table-paragraph">Gastos Totales: {{ resumenForm.get('gastosTotales')?.value | currency:'EUR':'symbol':'1.2-2'  }}</p>
+  <p class="table-paragraph">Saldo: {{ resumenForm.get('saldo')?.value | currency:'EUR':'symbol':'1.2-2'  }}</p>
+</div>
+
+<div>
+  <button class="boton-flotante" (click)="onCrearIngresoClick()">
+    <mat-icon>add</mat-icon>
+    <span></span>
+  </button>
+  <button class="boton-flotante right" (click)="onCrearGastoClick()">
+    <mat-icon>remove</mat-icon>
+    <span></span>
+  </button>
+</div>

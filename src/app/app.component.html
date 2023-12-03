@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <span>Finanzas Personales</span>
+    <span class="espacio_menu"></span>
+    <button *ngIf="isLogged" mat-icon-button (click)="alternarMenu()">
+        <mat-icon>menu</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-drawer-container class="app-container" autosize>
+    <mat-drawer class="app-sidenav" mode="side" position="end" [opened]="mostrarMenu">
+        <div *ngFor="let item of ITEMS_MENU">
+            <button mat-menu-item (click)="navegar_menu(item.url)">{{item.nombre}}</button>
+        </div>
+    </mat-drawer>
+    <router-outlet></router-outlet>
+</mat-drawer-container>

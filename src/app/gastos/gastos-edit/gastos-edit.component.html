@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{ modoEditar ? 'Editar Gasto' : 'Crear Gasto' }}</h1>
+<div mat-dialog-content *ngIf="formGroup" [formGroup]="formGroup">
+  <mat-form-field>
+    <input formControlName="nombre" matInput type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+    <mat-error *ngIf="formGroup.controls['nombre'].errors">
+      Debe indicar una nombre
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input formControlName="cantidad" matInput type="number" id="cantidad" name="cantidad" placeholder="Cantidad" required>
+    <mat-error *ngIf="formGroup.controls['cantidad'].errors">
+      Debe indicar una cantidad
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="fecha" name="fecha" [matDatepicker]="picker" placeholder="Fecha">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="formGroup.controls['fecha'].errors">
+      Debe indicar una fecha
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="categoria" id="categoria" name="categoria" placeholder="Categoría">
+      <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="formGroup.controls['categoria'].errors">
+      Debe indicar una categoria
+    </mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="esUnCapricho" id="esUnCapricho" name="esUnCapricho">¿Es un capricho?</mat-checkbox>
+
+  <div class="button-container">
+    <button (click)="cancelarEditar()" class="secundary-button">Cancelar</button>
+    <button (click)="confirmarEditar()" cdkFocusInitial class="main-button">
+      {{ modoEditar ? 'Guardar' : 'Crear' }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="table-container">
+  <h1 mat-dialog-title>Datos del Usuario</h1>
+  <div mat-dialog-content *ngIf="formGroup" [formGroup]="formGroup">
+    <mat-form-field class="form-field">
+      <mat-label for="nombre">Nombre:</mat-label>
+      <input matInput formControlName="nombre" type="text" id="nombre" name="nombre">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="apellido">Apellido:</mat-label>
+      <input matInput formControlName="apellido" type="text" id="apellido" name="apellido">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="email">Email:</mat-label>
+      <input matInput formControlName="email" type="email" id="email" name="email">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="password">Contraseña:</mat-label>
+      <input matInput formControlName="password" [type]="verContrasena ? 'text' : 'password'" id="password" name="password">
+      <button mat-icon-button matSuffix (click)="mostrarContrasena()">
+        <mat-icon>{{ verContrasena ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="form-field">
+      <p class="table-paragraph">Saldo: {{ saldo | currency:'EUR':'symbol'}}</p>
+    </div>
+
+    <div class="button-container">
+      <button [disabled]="!formGroup.dirty" (click)="guardarCambios()" cdkFocusInitial class="main-button">Guardar Cambios</button>
+      <button mat-button (click)="deshacerCambios()">Deshacer Cambios</button>
+    </div>
+  </div>
+</div>
