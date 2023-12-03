@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../models/usuario';
 
 @Component({
@@ -13,14 +13,14 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = true;
   registroExitoso: boolean = false;
   usuarioExistente: boolean = false;
-  formGroup: FormGroup = this.fb.group({});
+  formGroup: FormGroup;
 
   constructor(
     private appService: AppService,
     private router: Router,
-    private fb: FormBuilder
+    // private fb: FormBuilder
   ) { 
-    this.inicializarFormulario();
+    this.formGroup = this.inicializarFormulario();
   }
 
   ngOnInit(): void {
@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
   }
 
   inicializarFormulario() {
-    this.formGroup = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+    return new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', [Validators.required]),
+      email: new FormControl(0, [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
     });
   }
 
