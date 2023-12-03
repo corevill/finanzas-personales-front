@@ -119,7 +119,7 @@ export class AppService {
   }
 
   existeUsuario(email: string){
-  return this.http.get(`${this.apiPath}usuarios/verificar-existencia?email=${email}`);
+  return this.http.get(`${this.apiPath}usuarios/verificar-existencia?email=${email}`).pipe(map((res:any) => res && res.length > 0));
 }
 
   actualizarUsuario(usuario: Usuario) {
