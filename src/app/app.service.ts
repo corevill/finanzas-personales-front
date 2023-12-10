@@ -13,7 +13,7 @@ import { forkJoin, map } from 'rxjs';
 
 export class AppService {
      usuarioEnSession: number | null |undefined = null;
-     apiPath = '/api/';
+     apiPath = 'https://node-express-mmup-production.up.railway.app/api/v1/';
      categorias: CategoriaGasto [] = [];
      gastos: Gasto [] = [];
      ingresos: Ingreso [] = [];
